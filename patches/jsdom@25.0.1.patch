@@ -1,0 +1,13 @@
+diff --git a/lib/jsdom/living/nodes/ParentNode-impl.js b/lib/jsdom/living/nodes/ParentNode-impl.js
+index 0b7bd6555f28bfd06e2952ca8e77e2733cd93844..14a3999fc2e5990a8bb2cdff8e03eccf2049bc97 100644
+--- a/lib/jsdom/living/nodes/ParentNode-impl.js
++++ b/lib/jsdom/living/nodes/ParentNode-impl.js
+@@ -75,7 +75,7 @@ class ParentNodeImpl {
+       return NodeList.create(this._globalObject, [], { nodes: [] });
+     }
+     const matcher = addNwsapi(this);
+-    const list = matcher.select(selectors, idlUtils.wrapperForImpl(this));
++    const list = Array.from(matcher.select(selectors, idlUtils.wrapperForImpl(this))); // https://github.com/jsdom/jsdom/pull/3797
+ 
+     return NodeList.create(this._globalObject, [], { nodes: list.map(n => idlUtils.tryImplForWrapper(n)) });
+   }
